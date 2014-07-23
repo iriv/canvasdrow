@@ -3,8 +3,11 @@
 				
 		<script src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
 
-		<script src="../assets/jqueryplugs/color-picker/jquery.colorPicker.min.js"></script>
-		<link rel="stylesheet" href="../assets/jqueryplugs/color-picker/colorPicker.css" type="text/css" />
+		<!--<script src="../assets/jqueryplugs/color-picker/jquery.colorPicker.min.js"></script>
+		<link rel="stylesheet" href="../assets/jqueryplugs/color-picker/colorPicker.css" type="text/css" /> -->
+
+		<script type="text/javascript" src="../../../frameworks/jquery/plugins/simple-color-picker/jquery.colorPicker.min.js"></script>
+		<link rel="stylesheet" type="text/css" href="../../../frameworks/jquery/plugins/simple-color-picker/colorPicker.css">
 
 
 
@@ -43,7 +46,7 @@
                     this.obj.arc(x, y, this.fillSize, 0, Math.PI * 2, false);
                     this.obj.closePath();
 //                    this.obj.fill(); // Заливка окружности
-                    this.obj.strokeStyle = '#000';
+                    this.obj.strokeStyle = '#999';
 
                     this.obj.stroke();
 
@@ -100,7 +103,7 @@
 
 		$(function(){
 
-			// $('#color1').colorPicker();
+			// $('#color1').ColorPicker({});
 
 
 			// $('#color1').colorPicker({pickerDefault: "ffffff"});
@@ -122,6 +125,11 @@
 
 				}
 			} );
+
+
+			$("#area_cursor").mouseout(function(){
+				area_cursor.obj.clearRect(0,0,800,600);
+			});
 
 
 			var status_press = 0;
@@ -291,6 +299,7 @@
                 position: absolute;
                 top:9;
                 left:9;
+                cursor: none;
             }
 		</style>
 	</head>
@@ -302,8 +311,10 @@
 
 
 		<div id="colors">
-			<div><label for="color1">&nbsp;Color</label> <input id="color1" type="text" name="color1" value="#000000" /></div>
+			<div><label for="color1">&nbsp;Color</label> <input id="color1" type="button" name="color1" value="#000000" /></div>
 			<div style="float:left;"><label for="color2">&nbsp;Background</label> <input id="color2" type="text" name="color2" value="#ffffff" /></div>
+
+
 			<div><label>&nbsp;Size</label><input type="range" id="weight" min=0  max=50 value=0 step=10 onchange="v=(this.value==0) ? 1 : this.value;   area_main.fillSize=v; area_cursor.fillSize=v; $('#size').html(v);"></div><div for=fader id="size" >1</div>
 			<div><a href="#" onclick="area_main.obj.clearRect(0,0,800,600)">Clear</a></div>
 		</div>
