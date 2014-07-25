@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
+    <script src="js/class/canvas.js"></script>
+    <script>
+
+
+
+        var startX = 60;
+        var startY = 350;
+        var timer;
+
+        $(function(){
+            field = new classCanvas($("#field"));
+            field1 = new classCanvas($("#field1"));
+            field.fillSize = 50;
+            field.changeColor("red");
+            field.drowCircle(startX,startY);
+        });
+
+
+        function stop(){
+            clearInterval(timer);
+        }
+
+        function play(){
+
+//            clearInterval(timer);
+
+
+
+
+            $("#field,#field1").attr("width",$(document).width());
+            $("#field,#field1").attr("height",$(document).height());
+
+            var fieldW = Math.round(field.canvas.width());
+            var fieldH = Math.round(field.canvas.height());
+            var st="l"; //сторона в которую ударился шар
+            var an = 0; //угол под которым прилетел шар
+            startXHist=0;
+            startYHist=0;
+
+            inc=25; //speed
+
+
+
+            timer = setInterval(function(){
+
+
+
+//                clearInterval(timer);
+
+
+                if (startY >= fieldH - field.fillSize){
+//
+                    if (startXHist < startX){
+                        an = 0;
+                    }
+                    else{
+                        an = 1;
+                    }
+                    st = "b";
+
+                    field1.clearCanvas();
+
+                }
+
+                if (startX >= fieldW - field.fillSize){
+
+//                    clearInterval(timer);
+                    st = "r";
+                    if (startYHist > startY){
+                        an=0;
+                    }
+                    else{
+                        an=1;
+                    }
+                    field1.clearCanvas();
+                }
+
+                if (startY <= field.fillSize){
+//                    clearInterval(timer);
+                    st = "t";
+                    if (startXHist > startX){
+                        an = 0;
+                    }
+                    else{
+                        an = 1;
+                    }
+                    field1.clearCanvas();
+                }
+
+                if (startX <= field.fillSize){
+//                    clearInterval(timer);
+                    st = "l";
+                    if (startYHist < startY){
+                        an = 0;
+                    }
+                    else{
+                        an=1;
+                    }
+                    field1.clearCanvas();
+                }
+
+
+
+//                console.log(startXHist +" " + startX);
+
+                startXHist = startX;
+                startYHist = startY;
+
+
+//////////////////////////////
+
+                if (st=="b"){
+                    if (an==0){
+                        startX+=inc;
+                        startY-=inc;
+                    }
+                    else{
+                        startX-=inc;
+                        startY-=inc;
+                    }
+                    field.changeColor("red");
+                    field1.changeColor("red");
+
+                }
+
+                if (st=="r"){
+
+                    if (an==0){
+                        startX-=inc;
+                        startY-=inc;
+                    }
+                    else{
+                        startX-=inc;
+                        startY+=inc;
+                    }
+                    field.changeColor("green");
+                    field1.changeColor("green");
+
+                }
+
+                if (st=="t"){
+                    if (an==0){
+                        startX-=inc;
+                        startY+=inc;
+                    }
+                    else{
+                        startX+=inc;
+                        startY+=inc;
+                    }
+
+                    field.changeColor("blue");
+                    field1.changeColor("blue");
+
+                }
+
+                if (st=="l"){
+                    if (an==0){
+                        startX+=inc;
+                        startY+=inc;
+                    }
+                    else{
+                        startX+=inc;
+                        startY-=inc;
+                    }
+
+                    field.changeColor("white");
+                    field1.changeColor("white");
+
+                }
+
+
+
+
+
+
+//                console.log(startX+" "+startY);
+
+
+
+                field.clearCanvas();
+                field.drowCircle(startX,startY);
+//                field1.drowLine(startX,startY,startXHist,startYHist)
+
+//                field1.drowCircle(startX,startY);
+
+
+
+
+
+            },1);
+        }
+
+
+
+    </script>
+    <style>
+
+
+
+        body {
+            background-color: #000;
+        }
+
+        #field {
+            border: 0px solid #ccc;
+        }
+        #field1 {
+            border: 0px solid #ccc;
+            /*background-color: rgba(0,0,0,0.5);*/
+            position: absolute;
+            top:10;
+            left:10;
+        }
+    </style>
+</head>
+<body onload="play()">
+
+
+<canvas id="field1" width="800" height="600" ></canvas>
+<canvas id="field"  width="800" height="600"></canvas>
+
+<!--<a href="#" onclick="play()">play</a>-->
+<!--<input type="button" onclick="play()" value="play"/>-->
+<!--<input type="button" onclick="stop();" value="stop"/>-->
+</body>
+</html>

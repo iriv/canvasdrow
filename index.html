@@ -1,0 +1,41 @@
+<html>
+	<head>
+				
+		<script src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
+
+		<script src="js/jqueryplugs/color-picker/jquery.colorPicker.min.js"></script>
+		<link rel="stylesheet" href="js/jqueryplugs/color-picker/colorPicker.css" type="text/css" />
+
+        <link rel="stylesheet" href="css/main.css" type="text/css" />
+        <script src="js/class/canvas.js"></script>
+        <script src="js/main.js"></script>
+
+		<!--<script type="text/javascript" src="../../../frameworks/jquery/plugins/simple-color-picker/jquery.colorPicker.min.js"></script>-->
+		<!--<link rel="stylesheet" type="text/css" href="../../../frameworks/jquery/plugins/simple-color-picker/colorPicker.css">-->
+
+
+
+	</head>
+	<body>
+
+		<canvas id="area" width="800px" height="600px"></canvas>
+        <canvas id="area_cursor" width="800px" height="600px"></canvas>
+
+
+
+		<div id="colors">
+			<div><label for="color1">&nbsp;Color</label> <input id="color1" type="button" name="color1" value="#000000" /></div>
+			<div style="float:left;"><label for="color2">&nbsp;Background</label> <input id="color2" type="text" name="color2" value="#ffffff" /></div>
+
+
+			<div><label>&nbsp;Size</label><input type="range" id="weight" min=0  max=50 value=0 step=10 onchange="v=(this.value==0) ? 1 : this.value;   area_main.fillSize=v; area_cursor.fillSize=v; $('#size').html(v);"></div><div for=fader id="size" >1</div>
+			<div><a href="#" onclick="area_main.obj.clearRect(0,0,800,600)">Clear</a></div>
+		</div>
+
+        <div id="panelImages">
+            <input type="button" value="imgdrow"/>
+        </div>
+
+
+	</body>
+</html>
